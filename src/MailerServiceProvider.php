@@ -31,7 +31,7 @@ class MailerServiceProvider extends ServiceProvider
     }
 
     public function boot() {
-        include __DIR__.’/routes.php’;
-        include __DIR__.’/database/migrations/create_mail_table.php.stub’;
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 }
