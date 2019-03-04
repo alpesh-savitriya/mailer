@@ -9,7 +9,7 @@
             "email": "np@savitriya.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0",
         "illuminate/support": ">=5.5"
