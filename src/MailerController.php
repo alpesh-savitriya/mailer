@@ -33,31 +33,24 @@ class MailerController extends Controller
         // return nothing
     }
 
-    public function listMail(Request $request) {
+    public function listMail() {
         $result = array();
         $response = array();
 
         $result = Mailer::listMail();
 
         if (isset($result)) {
-            $response['code'] = 200;
-            $response['message'] = 'success';
-            $response['content'] = $result;
+            return $result;
         } else {
-            $response['code'] = 400;
-            $response['message'] = 'error';
-            $response['content'] = 'There is some error in getting list';
+            $result = "There is some error in getting mail list";
+            return $result;
         }
-
-        return response($response, $response['code'])
-            ->header('content_type', 'application/json');
     }
 
     public function showMailDetail(Request $request) {
         $response = array();
         $result = array();
 
-//        $id = $request->has('id') ? $request->input('id') : '';
         $uuid = $request->has('uuid') ? $request->input('uuid') : '';
 
         if ($uuid != '') {
@@ -66,9 +59,7 @@ class MailerController extends Controller
                 ->get();
             $uuidArray = array();
             $uuidArray['mail_from'] = $listUUID[0]->mail_from;
-//            $uuidArray['mail_to'] = $uuidData[0]->mail_to;
             $uuidArray['subject'] = $listUUID[0]->subject;
-//            $uuidArray['attachements'] = $uuidData[0]->attachements;
             $uuidArray['uuid'] = $listUUID[0]->uuid;
             $uuidArray['status'] = $listUUID[0]->status;
             $uuidArray['created_date'] = $listUUID[0]->created_date;

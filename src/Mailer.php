@@ -20,8 +20,17 @@ class Mailer extends Model
 
     public static function listMail() {
         $uuid = Mailer::groupBy('uuid')
-            ->select('*')
-            ->get();
+            ->select(DB::raw('ANY_VALUE(mail_from) as mail_from, 
+            ANY_VALUE(mail_to) as mail_to,
+            ANY_VALUE(subject) as subject,
+            ANY_VALUE(attachements) as attachements,
+            ANY_VALUE(uuid) as uuid,
+            ANY_VALUE(status) as status,
+            ANY_VALUE(created_date) as created_date,
+            ANY_VALUE(sent_at) as sent_at,
+            ANY_VALUE(opened_at) as opened_at,
+            ANY_VALUE(template) as template'))->get();
+        
         $listMail = array();
         foreach ($uuid as $uuidData) {
             $uuidArray = array();

@@ -11,11 +11,8 @@
 |
 */
 
-$router->group(['namespace' => 'PseudoMailer\Mailer'], function() use($router) {
-    $router->post('/sentmail', 'MailerController@sentMails');
-    $router->get('/listmail', 'MailerController@listMail');
-    $router->post('/showmaildetail', 'MailerController@showMailDetail');
-});
+Route::get('listmail', '\PseudoMailer\Mailer\MailerController@listMail');
+Route::get('showmaildetails', '\PseudoMailer\Mailer\MailerController@showMailDetail');
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
