@@ -11,10 +11,10 @@
 |
 */
 
-$router->group(['prefix' => 'v1'], function() use($router) {
-    $router->post('/sentmail', 'PseudoMailerController@sentMails');
-    $router->get('/listmail', 'PseudoMailerController@listMail');
-    $router->post('/showmaildetail', 'PseudoMailerController@showMailDetail');
+$router->group(['namespace' => 'MailerController\Controllers'], function() use($router) {
+    $router->post('/sentmail', 'MailerController@sentMails');
+    $router->get('/listmail', 'MailerController@listMail');
+    $router->post('/showmaildetail', 'MailerController@showMailDetail');
 });
 
 $router->get('/', function () use ($router) {
