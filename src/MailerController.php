@@ -33,21 +33,26 @@ class MailerController extends Controller
         // return nothing
     }
 
-    public function listMail() {
+    public static function listMail() {
         $result = array();
         $response = array();
 
         $result = Mailer::listMail();
 
         if (isset($result)) {
-            return $result;
+            $response['code'] = 200;
+            $response['message'] = 'success';
+            $response['content'] = $result;
         } else {
-            $result = "There is some error in getting mail list";
-            return $result;
+            $response['code'] = 400;
+            $response['message'] = 'error';
+            $response['content'] = '';
         }
+        return response($response, $response['code'])
+            ->header('content_type', 'application/json');
     }
 
-    public function showMailDetail(Request $request) {
+    public static function showMailDetail(Request $request) {
         $response = array();
         $result = array();
 
