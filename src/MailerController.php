@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Validator;
 
 
-class MailerController extends Controllers
+class MailerController extends Controller
 {
     public function insertMails($mailToArray, $mailFrom, $subject, $template, $attachements) {
         $uuid = uniqid();
