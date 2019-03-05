@@ -11,7 +11,7 @@
 |
 */
 
-$router->group(['namespace' => 'MailerController\Controllers'], function() use($router) {
+$router->group(['namespace' => 'PseudoMailer\Mailer'], function() use($router) {
     $router->post('/sentmail', 'MailerController@sentMails');
     $router->get('/listmail', 'MailerController@listMail');
     $router->post('/showmaildetail', 'MailerController@showMailDetail');
