@@ -8,7 +8,6 @@
 
 namespace PseudoMailer\Mailer;
 namespace App\Http\Controllers;
-namespace MailerController\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;

@@ -24,10 +24,6 @@ class MailerServiceProvider extends ServiceProvider
         });
 
         $this->app->alias(Mailer::class, 'mailer');
-
-        // register our controller
-
-        $this->app->make('PseudoMailer\Mailer\MailerController');
     }
 
     public function boot() {
