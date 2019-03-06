@@ -12,4 +12,4 @@
 */
 
 Route::get('listmail', '\PseudoMailer\Mailer\MailerController@listMail');
-Route::get('showmaildetails', '\PseudoMailer\Mailer\MailerController@showMailDetail');
+Route::post('showmaildetails', '\PseudoMailer\Mailer\MailerController@showMailDetail');
