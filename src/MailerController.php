@@ -7,11 +7,10 @@
  */
 
 namespace PseudoMailer\Mailer;
-namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-
+use Laravel\Lumen\Routing\Controller;
 
 class MailerController extends Controller
 {
