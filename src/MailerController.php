@@ -14,6 +14,15 @@ use Laravel\Lumen\Routing\Controller;
 
 class MailerController extends Controller
 {
+    /**
+     * Insert Mails File from Local file system
+     * @param array $mailToArray is an array of mail to which mail to be sent.
+     * @param  string $mailFrom is an string value which denotes the sender of the mail
+     * @param string $subject which defines the subject of the mail
+     * @param string $template which define the template file  (.blade file) of the mail
+     * @param array $attachements which is attachments to the mail (images, doc, pdf etc.)
+     * @return boolean
+     */
     public function insertMails($mailToArray, $mailFrom, $subject, $template, $attachements) {
         $uuid = uniqid();
         $createdDate = date("Y-m-d h:i:s");
