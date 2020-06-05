@@ -1,13 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: roshani
+ * User: alpesh
  * Date: 4/3/19
  * Time: 12:23 PM
  */
 
 namespace PseudoMailer\Mailer;
-
 use Illuminate\Http\Request;
 use Validator;
 use Laravel\Lumen\Routing\Controller;
@@ -23,10 +22,14 @@ class MailerController extends Controller
      * @param array $attachements which is attachments to the mail (images, doc, pdf etc.)
      * @return boolean
      */
+
     public function insertMails($mailToArray, $mailFrom, $subject, $template, $attachements) {
+
         $uuid = uniqid();
         $createdDate = date("Y-m-d h:i:s");
+
         foreach ($mailToArray as $mailTo) {
+
             // insert into db
             $createMail = new Mailer();
             $createMail->mail_from = $mailFrom;
@@ -42,34 +45,40 @@ class MailerController extends Controller
     }
 
     public static function listMail() {
+
         $result = array();
         $response = array();
 
         $result = Mailer::listMail();
 
         if (isset($result)) {
+
             $response['code'] = 200;
             $response['message'] = 'success';
             $response['content'] = $result;
+
         } else {
+
             $response['code'] = 400;
             $response['message'] = 'error';
             $response['content'] = '';
         }
+        
         return response($response, $response['code'])
             ->header('content_type', 'application/json');
     }
 
     public static function showMailDetail(Request $request) {
+
         $response = array();
         $result = array();
 
         $uuid = $request->has('uuid') ? $request->input('uuid') : '';
 
         if ($uuid != '') {
-            $listUUID = Mailer::select('*')
-                ->where('mails.uuid', '=', $uuid)
-                ->get();
+
+            $listUUID = Mailer::select('*')->where('mails.uuid', '=', $uuid)->get();
+
             $uuidArray = array();
             $uuidArray['mail_from'] = $listUUID[0]->mail_from;
             $uuidArray['subject'] = $listUUID[0]->subject;
@@ -79,21 +88,23 @@ class MailerController extends Controller
             $uuidArray['sent_at'] = $listUUID[0]->sent_at;
             $uuidArray['opened_at'] = $listUUID[0]->opened_at;
             $uuidArray['template'] = $listUUID[0]->template;
+
             $uuidArray['id'] = array();
             $uuidArray['mail_to'] = array();
             $uuidArray['attachements'] = array();
-
 
             foreach ($listUUID as $id) {
                 $idArr = array();
                 $idArr['id'] = $id->id;
                 array_push($uuidArray['id'], $idArr['id']);
             }
+
             foreach ($listUUID as $mailTo) {
                 $mailToArr = array();
                 $mailToArr['mail_to'] = $mailTo->mail_to;
                 array_push($uuidArray['mail_to'], $mailToArr['mail_to']);
             }
+
             foreach ($listUUID as $attechement) {
                 $attechementArr = array();
                 $attechementArr['attachements'] = $attechement->attachements;
@@ -103,10 +114,13 @@ class MailerController extends Controller
         }
 
         if (isset($result)) {
+
             $response['code'] = 200;
             $response['message'] = 'success';
             $response['content'] = $result;
+
         } else {
+
             $response['code'] = 400;
             $response['message'] = 'error';
             $response['content'] = '';
